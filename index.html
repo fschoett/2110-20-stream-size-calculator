@@ -21,7 +21,7 @@
 				
 				<!-- LOGO -->
 				<div class="column col-6">
-					<div class="logo col-mx-auto col-10 col-md-10 column"></div>
+					<div class="logo col-mx-auto col-6 col-md-10 column"></div>
 				</div>
 				
 				<!-- INFO LINK -->
@@ -39,10 +39,10 @@
 			<!-- INPUT CONTAINER -->
 			<div class="col-mx-auto col-6 col-md-12 column inputContainer">
 				<div class="columns">
-					<div class="col-mx-auto column col-10 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
 						<div class="form-group">	
 							<label class="form-label" for="presets">Presets</label>
-							<select id="preset" class="form-select col-12 col-md-10">
+							<select id="preset" class="form-select col-12">
 							  <option>2160p50 / 4:4:4 / 12 bit</option>
 							  <option>2160p60 / 4:2:2 / 10 bit</option>
 							  <option>2160p25 / 4:2:2 / 10 bit</option>
@@ -58,34 +58,34 @@
 				</div>
 				
 				<div class="columns">
-					<div class="col-mx-auto column col-10 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
 						<div class="form-group">	
 							<label class="form-label" for="frame_width">width [px]</label>
-							<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frame_width" placeholder="width">
+							<input class="column col-12 form-input" step="any" type="text" id="frame_width" placeholder="width">
 						</div>
 					</div>
 				</div>	
 				<div class="columns">
-					<div class="col-mx-auto column col-10 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
 						<div class="form-group">	
 							<label class="form-label" for="frame_height">height[px] </label>
-							<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frame_height" placeholder="height">
+							<input class="column col-12 form-input" step="any" type="text" id="frame_height" placeholder="height">
 						</div>
 					</div>	
 				</div>
 				<div class="columns">
-					<div class="col-mx-auto column col-10 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
 						<div class="form-group">	
 							<label class="form-label" for="frames_p_s">Frames per second [scalar] </label>
-							<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frames_p_s" placeholder="fps">
+							<input class="column col-12 form-input" step="any" type="text" id="frames_p_s" placeholder="fps">
 						</div>
 					</div>	
 				</div>
 				<div class="columns">
-					<div class="col-mx-auto column col-10 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
 						<div class="form-group">	
 							<label class="form-label" for="sample_res">Sample res. [Bit]</label>
-							<select id="sample_res"class="form-select col-12 col-md-10">
+							<select id="sample_res"class="form-select col-12">
 							  <option>8</option>
 							  <option>10</option>
 							  <option>12</option>
@@ -94,10 +94,10 @@
 					</div>	
 				</div>
 				<div class="columns">
-					<div class="col-mx-auto column col-10 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
 						<div class="form-group">	
 							<label class="form-label" for="sample_res">Sampling</label>
-							<select id="sampling" class="form-select col-12 col-md-10">
+							<select id="sampling" class="form-select col-12">
 							  <option>4:4:4</option>
 							  <option>4:2:2</option>
 							  <option>4:2:0</option>
@@ -106,8 +106,8 @@
 					</div>	
 				</div>
 				<div class="columns" style="margin-top: 30px">
-					<div class="col-mx-auto column col-10 col-md-10">
-						<div class="column columns col-12 col-md-10">
+					<div class="col-mx-auto column col-6 col-md-10">
+						<div class="column columns col-12">
 							<div class="column"></div>
 							<button id="calc_btn"class="column col-auto btn btn-primary">CALCULATE</button>
 						</div>
@@ -119,7 +119,7 @@
 			<!-- RESULT TABLE -->
 			<div class="col-mx-auto col-6 col-md-12 column columns resultContainer">
 				<table class="table columns col-mx-auto col-10">
-				  <tbody>
+				  <tbody class="">
 					<tr class="">
 					  <td>Frame Size [MByte]</td>
 					  <td class="text-primary result"><span id="frame_size"></span></td>
@@ -150,13 +150,14 @@
 					</tr>
 					<tr class="">
 					  <td>Min. Network Speed</td>
-					  <td class="text-primary popover popover-left">
+					  <td class="text-primary popover popover-top" style="width: 100%; text-align: end;">
 						<span id="min_network_speed" class="result btn badge is-hidden" data-badge="1" style="font-weight:bold"></span>
 						<div id="popover_container" class="popover-container">
 						  <div class="card" style="text-align:center">
 						  <div class="card-body">
 							<table class="table columns col-mx-auto col-10 text-dark">
 							  <tbody class="text-success">
+								
 								<tr id="400GBit" class="">
 								  <td class="">400GBit</td>
 								  <td class="result"><span >0</span></td>
@@ -185,6 +186,7 @@
 								  <td class="">100MBit</td>
 								  <td class="result"><span >0 </span></td>
 								</tr>
+							  
 							  </tbody>
 							</table>
 						  </div>
