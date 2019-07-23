@@ -21,108 +21,6 @@
 
 // bpp = 180 blocks per package
 // ppp = pixels per package
-const samplingTable = {
-	"4:2:2":{
-		"8" : {
-			"bpp": 7,
-			"ppp": 630
-		},
-		"10": {
-			"bpp": 7,
-			"ppp": 504
-		},
-		"12": {
-			"bpp": 7,
-			"ppp": 420
-		}
-	},
-	"4:4:4":{
-		"8" : {
-			"bpp": 7,
-			"ppp": 420
-		},
-		"10": {
-			"bpp": 7,
-			"ppp": 336
-		},
-		"12": {
-			"bpp": 7,
-			"ppp": 280
-		},
-		"16": {
-			"bpp": 7,
-			"ppp": 210
-		}
-	},
-	"4:2:0":{
-		"8" : {
-			"bpp": 7,
-			"ppp": 840
-		},
-		"10": {
-			"bpp": 7,
-			"ppp": 672
-		},
-		"12": {
-			"bpp": 7,
-			"ppp": 560
-		}
-	}
-}
-
-const PRESETS = {
-	"2160p50 / 4:4:4 / 12 bit":{
-		width: 4096,
-		height: 2160,
-		sampling: "4:4:4",
-		sampleRes: 12,
-		fps: 50
-	},
-	"2160p25 / 4:2:2 / 10 bit":{
-		width: 4096,
-		height: 2160,
-		sampling: "4:2:2",
-		sampleRes: 10,
-		fps: 25
-	},
-	"1080p50 / 4:2:2 / 10 bit":{
-		width: 1920,
-		height: 1080,
-		sampling: "4:2:2",
-		sampleRes: 10,
-		fps: 50
-	},
-	"1080p25 / 4:2:2 / 10 bit":{
-		width: 1920,
-		height: 1080,
-		sampling: "4:2:2",
-		sampleRes: 10,
-		fps: 25
-	},
-	"720p50 / 4:2:2 / 10 bit":{
-		width: 720,
-		height: 1280,
-		sampling: "4:2:2",
-		sampleRes: 10,
-		fps: 50
-	},
-	"PAL":{
-		width: 720,
-		height: 576,
-		sampling: "4:2:2",
-		sampleRes: 10,
-		fps: 25
-	},
-	"NTSC":{
-		width: 720,
-		height: 576,
-		sampling: "4:2:2",
-		sampleRes: 10,
-		fps: 29.97
-	},
-		
-}
-
 
 // Register listeners
 $( document ).ready(function() {
@@ -176,22 +74,40 @@ function calculate (){
 	console.log( "Frame Size : ", frameSize);
 	console.log( "Video Size : ", videoSize);*/
 	
-	$("#frame_size").text( (frameSize/ 1000000.0).toLocaleString().replace(/,/g , " " ));
-	$("#video_size").text( (videoSize/ 1000000.0).toLocaleString().replace(/,/g  , " " ));
+	$("#frame_size").html( toFormattedString( frameSize/ 1000000.0 ) );
+	$("#video_size").text( toFormattedString( videoSize/ 1000000.0 ) );
 	
 	var ppf = calcPcktsPerFrame( currInput.width* currInput.height, sampling, currInput.sampleRes);
 	var headerSize = calcAvgHeaderSize( calcRTPPayloadHeaderSize());
 	
 	var streamSize = calcStreamSize( currInput.fps, headerSize, ppf, videoSize);
 	
-	$("#header_size").text( headerSize.toLocaleString().replace(/,/g , " " ) );
-	$("#stream_size").text( (streamSize/ 1000000).toLocaleString().replace(/,/g  , " " ));
-	$("#pps").text( (ppf * currInput.fps).toLocaleString().replace(/,/g  , " " ) );
-	$("#ppf").text( ppf.toLocaleString().replace(/,/g , " " ) );
+	$("#header_size").text( toFormattedString( headerSize ) );
+	$("#stream_size").text( toFormattedString( streamSize/ 1000000 ) );
+	$("#pps").text( toFormattedString( ppf * currInput.fps ) );
+	$("#ppf").text( toFormattedString( ppf ));
 	
 	$("#gbit_req").text( Math.ceil((streamSize * 8) /1000000000 ));
 }
 
+function toFormattedString ( num ){
+	var rounded  = Math.round( num * 100.0 ) / 100.0;
+	var str_seperated = rounded.toLocaleString();
+	const SEPERATOR_CHAR = " ";
+	var str_custom_seperated = str_seperated.replace(/,/g , " " );
+	
+	return checkForDec( str_custom_seperated);
+	
+}
+
+function checkForDec( str ){
+  if( str.indexOf( "." ) == -1){
+    return str +".00";
+  }
+  else {
+    return str;
+  }
+}
 
 function calcFrameSize( width, height, sampling, sampleRes ){
 	var samplingFactor;

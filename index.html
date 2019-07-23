@@ -9,177 +9,150 @@
 	<link rel="stylesheet" href="frameworks/spectre-icons.min.css">
 	<link rel="stylesheet" href="stylesheets/main.css">
 	<script src="frameworks/jquery-3.4.1.min.js"></script>
-	<script src="js/bigNumber.js"></script>
+	<script src="js/const.js"></script>
 	<script src="js/app.js"></script>
   </head>
   <body>
 	
 	<div class="container">
-	<div class="columns">
-	
-		<div class="column columns col-12">
-			
-			<div class="column col-6">
-				<div class="logo col-mx-auto col-10 col-md-10 column"></div>
-			</div>
-			
-			<div id="info-container" class="column col-ml-auto col-6" style="width:auto; height:100%">
-				<a class="btn " href="./info.html" style="margin-top:100%"> Info </a>
-			</div>
+		<div class="columns">
 		
-		</div>
-		
-		<div class="column col-12">
-			<h3 class="col-6 col-md-10 column" style="text-align:center">2110-20 Stream Size Calculator</h3> 
-		</div>
-		
-	
-		<div class="col-mx-auto col-6 col-md-12 column inputContainer">
-		
-			<div class="columns">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="form-group">	
-						<label class="form-label" for="presets">Presets</label>
-						<select id="preset" class="form-select col-12 col-md-10">
-						  <option>2160p50 / 4:4:4 / 12 bit</option>
-						  <option>2160p25 / 4:2:2 / 10 bit</option>
-						  <option>1080p50 / 4:2:2 / 10 bit</option>
-						  <option>1080p25 / 4:2:2 / 10 bit</option>
-						  <option>720p50 / 4:2:2 / 10 bit</option>
-						  <option>PAL</option>
-						  <option>NTSC</option>
-						</select>
-					</div>
-				</div>	
-			</div>
-			
-			<div class="columns">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="form-group">	
-						<label class="form-label" for="frame_width">width [px]</label>
-						<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frame_width" placeholder="width">
-					</div>
+			<div class="column columns col-12">
+				
+				<!-- LOGO -->
+				<div class="column col-6">
+					<div class="logo col-mx-auto col-10 col-md-10 column"></div>
 				</div>
-			</div>	
-			<div class="columns">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="form-group">	
-						<label class="form-label" for="frame_height">height[px] </label>
-						<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frame_height" placeholder="height">
-					</div>
-				</div>	
-			</div>
-			<div class="columns">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="form-group">	
-						<label class="form-label" for="frames_p_s">Frames per second [scalar] </label>
-						<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frames_p_s" placeholder="fps">
-					</div>
-				</div>	
-			</div>
-			<div class="columns">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="form-group">	
-						<label class="form-label" for="sample_res">Sample res. [Bit]</label>
-						<select id="sample_res"class="form-select col-12 col-md-10">
-						  <option>8</option>
-						  <option>10</option>
-						  <option>12</option>
-						</select>
-					</div>
-				</div>	
-			</div>
-			<div class="columns">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="form-group">	
-						<label class="form-label" for="sample_res">Sampling</label>
-						<select id="sampling" class="form-select col-12 col-md-10">
-						  <option>4:4:4</option>
-						  <option>4:2:2</option>
-						  <option>4:2:0</option>
-						</select>
-					</div>
-				</div>	
-			</div>
-			<div class="columns" style="margin-top: 30px">
-				<div class="col-mx-auto column col-10 col-md-10">
-					<div class="column columns col-12 col-md-10">
-						<div class="column"></div>
-						<button id="calc_btn"class="column col-auto btn btn-primary">CALCULATE</button>
-					</div>
-					
-				</div>	
-			</div>	
-		</div>
-		
-		
-		<div class="col-mx-auto col-6 col-md-12 column resultContainer">
-			<div class="columns">
-				<div class="col-mx-auto column columns  col-10 col-md-10">
-					<div class="col-6">
-						<label class="form-label" for="frame_size">Frame Size [MByte]</label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="frame_size">0</span>
-					</div>
-					<div class="col-6">
-						<label class="form-label" for="video_size">Video Size [MByte/s]</label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="video_size">0</span>
-					</div>
+				
+				<!-- INFO LINK -->
+				<div id="info-container" class="column col-ml-auto col-6" style="width:auto; height:100%">
+					<a class="btn " href="./info.html" style="margin-top:100%"> Info </a>
 				</div>
+			
 			</div>
 			
-			<div class="columns">
-				<div class="col-mx-auto column columns col-10 col-md-10">
-					<div class="col-6">
-						<label class="form-label" for="header_size">Avg Header Size [Byte]</label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="header_size">0</span>
-					</div>
-					<div class="col-6">
-						<label class="form-label" for="pps">Packets per second</label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="pps">0</span>					
+			<!-- HEADING -->
+			<div class="column col-12">
+				<h3 class="col-6 col-md-10 column heading" style="text-align:center">2110-20 Stream Size Calculator</h3> 
+			</div>
+			
+			<!-- INPUT CONTAINER -->
+			<div class="col-mx-auto col-6 col-md-12 column inputContainer">
+				<div class="columns">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="form-group">	
+							<label class="form-label" for="presets">Presets</label>
+							<select id="preset" class="form-select col-12 col-md-10">
+							  <option>2160p50 / 4:4:4 / 12 bit</option>
+							  <option>2160p60 / 4:2:2 / 10 bit</option>
+							  <option>2160p25 / 4:2:2 / 10 bit</option>
+							  <option>1080p60 / 4:2:2 / 10 bit</option>
+							  <option>1080p50 / 4:2:2 / 10 bit</option>
+							  <option>1080p25 / 4:2:2 / 10 bit</option>
+							  <option>720p50 / 4:2:2 / 10 bit</option>
+							  <option>PAL</option>
+							  <option>NTSC</option>
+							</select>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="columns">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="form-group">	
+							<label class="form-label" for="frame_width">width [px]</label>
+							<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frame_width" placeholder="width">
+						</div>
 					</div>
 				</div>	
+				<div class="columns">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="form-group">	
+							<label class="form-label" for="frame_height">height[px] </label>
+							<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frame_height" placeholder="height">
+						</div>
+					</div>	
+				</div>
+				<div class="columns">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="form-group">	
+							<label class="form-label" for="frames_p_s">Frames per second [scalar] </label>
+							<input class="column col-12 col-md-10 form-input" step="any" type="text" id="frames_p_s" placeholder="fps">
+						</div>
+					</div>	
+				</div>
+				<div class="columns">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="form-group">	
+							<label class="form-label" for="sample_res">Sample res. [Bit]</label>
+							<select id="sample_res"class="form-select col-12 col-md-10">
+							  <option>8</option>
+							  <option>10</option>
+							  <option>12</option>
+							</select>
+						</div>
+					</div>	
+				</div>
+				<div class="columns">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="form-group">	
+							<label class="form-label" for="sample_res">Sampling</label>
+							<select id="sampling" class="form-select col-12 col-md-10">
+							  <option>4:4:4</option>
+							  <option>4:2:2</option>
+							  <option>4:2:0</option>
+							</select>
+						</div>
+					</div>	
+				</div>
+				<div class="columns" style="margin-top: 30px">
+					<div class="col-mx-auto column col-10 col-md-10">
+						<div class="column columns col-12 col-md-10">
+							<div class="column"></div>
+							<button id="calc_btn"class="column col-auto btn btn-primary">CALCULATE</button>
+						</div>
+						
+					</div>	
+				</div>	
+			</div>
+			
+			<!-- RESULT TABLE -->
+			<div class="col-mx-auto col-6 col-md-12 column resultContainer">
+				<table class="table columns col-mx-auto col-10">
+				  <tbody>
+					<tr class="">
+					  <td>Frame Size [MByte]</td>
+					  <td class="text-primary result"><span id="frame_size"></span></td>
+					</tr>
+					<tr class="">
+					  <td>Video Size [MByte/s]</td>
+					  <td class="text-primary result"><span id="video_size"></span></td>
+					</tr>
+					<tr class="">
+					  <td>Avg Header Size [Byte]</td>
+					  <td class="text-primary result"><span id="header_size"></span></td>
+					</tr>
+					<tr class="">
+					  <td>Packets per second</td>
+					  <td class="text-primary result"><span id="pps"></span></td>
+					</tr>
+					<tr class="">
+					  <td>Packets per frame</td>
+					  <td class="text-primary result"><span id="ppf"></span></td>
+					</tr>
+					<tr class="">
+					  <td>Stream Size [MByte/s]</td>
+					  <td class="text-primary result"><span id="stream_size"></span></td>
+					</tr>
+					<tr class="">
+					  <td>GBit needed</td>
+					  <td class="text-primary result"><span id="gbit_req"></span></td>
+					</tr>
+				  </tbody>
+				</table>
 			</div>
 
-			<div class="columns">
-				<div class="col-mx-auto column columns col-10 col-md-10">
-					<div class="col-6">
-						<label class="form-label" for="ppf">Packets per frame </label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="ppf">0</span>
-					</div>
-					<div class="col-6">
-						<label class="form-label" for="stream_size">Stream Size [MByte/s]</label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="stream_size">0</span>
-					</div>
-				</div>	
-			</div>
-			
-			<div class="columns">
-				<div class="col-mx-auto column columns col-10 col-md-10">
-					
-					<div class="col-6">
-						<label class="form-label" for="gbit_req">GBit needed :</label>
-						<span disabled class="text-primary result column col-12 col-md-10" id="gbit_req">0</span>
-					</div>
-				</div>	
-			</div>
-			
-			<!--
-			<table class="table columns col-ml-auto">
-			  <tbody>
-				<tr class="">
-				  <td>Frame Size</td>
-				  <td>8003.3</td>
-				</tr>
-			  </tbody>
-			</table>-->
-			
 		</div>
-
-	</div>
-	
-
-	
-	
 	</div>
   </body>
 </html>

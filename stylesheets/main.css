@@ -8,6 +8,11 @@
 	margin-bottom: 50px;
 }
 
+
+.heading{
+	font-weight:bold;
+}
+
 .inputContainer{
 	margin-bottom: 10%;
 }
@@ -20,4 +25,9 @@
 
 .result{
 	font-weight:bold;
+	text-align:right;
+}
+
+table{
+	font-size: larger;
 }
