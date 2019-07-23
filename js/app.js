@@ -87,7 +87,9 @@ function calculate (){
 	$("#pps").text( toFormattedString( ppf * currInput.fps ) );
 	$("#ppf").text( toFormattedString( ppf ));
 	
-	$("#gbit_req").text( Math.ceil((streamSize * 8) /1000000000 ));
+	$("#gbit_req").text( toFormattedString((streamSize * 8) /1000000 ));
+	
+	renderMinNetwork( (streamSize * 8) /1000000 );
 }
 
 function toFormattedString ( num ){
@@ -107,6 +109,47 @@ function checkForDec( str ){
   else {
     return str;
   }
+}
+
+function renderMinNetwork( streamSizeMBit){
+	
+	$("#min_network_speed").removeClass("is-hidden");
+	
+	const labelIDs = { 
+		100:"#100MBit", 
+		1000:"#1GBit",
+		10000:"#10GBit",
+		40000:"#40GBit",
+		100000:"#100GBit",
+		200000:"#200GBit",
+		400000:"#400GBit"
+	};
+	
+	var smallestKey;
+	for( var key in labelIDs){
+		if ( key < streamSizeMBit){
+			$( labelIDs[key] ).addClass("text-error");
+			$( labelIDs[key] ).find("span").text( "0" );
+		}
+		else{
+			console.log("Smalleest key", smallestKey);
+			if( smallestKey ){
+				if( key < smallestKey) smallestKey = key;
+			}
+			else{ smallestKey = key;}
+			
+			$( labelIDs[key] ).removeClass("text-error");
+			$( labelIDs[key] ).find("span").text( Math.floor(key / streamSizeMBit) );
+		}
+	}
+	
+	if ( !smallestKey ) $("#min_network_speed").text(">400Gbit!");
+	else{
+		$("#min_network_speed").attr("data-badge", Math.floor(smallestKey / streamSizeMBit));
+		$("#min_network_speed").text( labelIDs[smallestKey]);
+	}
+	
+	
 }
 
 function calcFrameSize( width, height, sampling, sampleRes ){

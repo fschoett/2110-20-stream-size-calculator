@@ -117,7 +117,7 @@
 			</div>
 			
 			<!-- RESULT TABLE -->
-			<div class="col-mx-auto col-6 col-md-12 column resultContainer">
+			<div class="col-mx-auto col-6 col-md-12 column columns resultContainer">
 				<table class="table columns col-mx-auto col-10">
 				  <tbody>
 					<tr class="">
@@ -145,12 +145,59 @@
 					  <td class="text-primary result"><span id="stream_size"></span></td>
 					</tr>
 					<tr class="">
-					  <td>GBit needed</td>
+					  <td>Stream Size [MBit/s]</td>
 					  <td class="text-primary result"><span id="gbit_req"></span></td>
+					</tr>
+					<tr class="">
+					  <td>Min. Network Speed</td>
+					  <td class="text-primary popover popover-left">
+						<span id="min_network_speed" class="result btn badge is-hidden" data-badge="1" style="font-weight:bold"></span>
+						<div id="popover_container" class="popover-container">
+						  <div class="card" style="text-align:center">
+						  <div class="card-body">
+							<table class="table columns col-mx-auto col-10 text-dark">
+							  <tbody class="text-success">
+								<tr id="400GBit" class="">
+								  <td class="">400GBit</td>
+								  <td class="result"><span >0</span></td>
+								</tr>
+								<tr id="200GBit" class="">
+								  <td class="">200GBit</td>
+								  <td class="result"><span >0</span></td>
+								</tr>
+								<tr id="100GBit" class="">
+								  <td class="">100GBit</td>
+								  <td class="result"><span >0</span></td>
+								</tr>
+								<tr id="40GBit" class="">
+								  <td class="">40GBit</td>
+								  <td class="result"><span >0 </span></td>
+								</tr>
+								<tr id="10GBit" class="">
+								  <td class="">10GBit</td>
+								  <td class=" result"><span >0 </span></td>
+								</tr>
+								<tr id="1GBit" class="">
+								  <td class="">1GBit</td>
+								  <td class=" result"><span >0 </span></td>
+								</tr>
+								<tr id="100MBit" class="">
+								  <td class="">100MBit</td>
+								  <td class="result"><span >0 </span></td>
+								</tr>
+							  </tbody>
+							</table>
+						  </div>
+						  </div>
+						</div>
+					  </td>
 					</tr>
 				  </tbody>
 				</table>
 			</div>
+			
+			
+
 
 		</div>
 	</div>

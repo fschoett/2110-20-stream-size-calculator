@@ -31,3 +31,19 @@
 table{
 	font-size: larger;
 }
+
+.speed_list{
+	margin-top: 1em;
+}
+
+.card{
+	font-size: small;
+}
+
+#popover_container{
+	width: 150px;
+}
+
+.is-hidden{
+	display:none;
+}
