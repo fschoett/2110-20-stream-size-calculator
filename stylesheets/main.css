@@ -1,0 +1,23 @@
+.logo{
+	background-image: url(../images/BCE_logo.png);
+	background-position: left;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.inputContainer{
+	margin-bottom: 10%;
+}
+
+
+.resultContainer{
+	border-left: 1px solid rgba(0,0,0,0.2);
+	height:100%;
+}
+
+.result{
+	font-weight:bold;
+}
