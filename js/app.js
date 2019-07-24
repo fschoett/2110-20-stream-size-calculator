@@ -136,9 +136,14 @@ function renderMinNetwork( streamSizeMBit){
 			$( labelIDs[key] ).find("span").text( "0" );
 		}
 		else{
+			console.table({"Smallest Key": smallestKey, "Key":key});
 			console.log("Smalleest key", smallestKey);
 			if( smallestKey ){
-				if( key < smallestKey) smallestKey = key;
+				console.log("Smallest key is not null");
+				if( parseInt(key) < parseInt(smallestKey) ) {
+					console.log("key is smaller as smallest key");
+					smallestKey = key
+				};
 			}
 			else{ smallestKey = key;}
 			
