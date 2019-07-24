@@ -121,7 +121,9 @@ function renderMinNetwork( streamSizeMBit){
 		100:"#100MBit", 
 		1000:"#1GBit",
 		10000:"#10GBit",
+		25000:"#25GBit",
 		40000:"#40GBit",
+		50000:"#50GBit",
 		100000:"#100GBit",
 		200000:"#200GBit",
 		400000:"#400GBit"
