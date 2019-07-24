@@ -24,6 +24,8 @@
 
 // Register listeners
 $( document ).ready(function() {
+	onPresetSelect( PRESETS[$("#preset").val()] );
+	
     console.log( "ready!" );
 	
 	$("#calc_btn").on("click", ()=>{
