@@ -25,21 +25,21 @@
 // Register listeners
 $( document ).ready(function() {
 	onPresetSelect( PRESETS[$("#preset").val()] );
-	
+
     console.log( "ready!" );
-	
+
 	$("#calc_btn").on("click", ()=>{
 		calculate();
 	});
-	
+
 	$('#preset').on('change', function() {
 		onPresetSelect( PRESETS[ this.value ] );
 		calculate();
 	});
-	
+
 	$("#frame_width, #frame_height, #sampling, #sample_res, #frames_p_s").on("input", ()=> calculate());
-	
-	
+
+
 });
 
 function retrieveInput (){
@@ -48,7 +48,7 @@ function retrieveInput (){
 	var sampling = $("#sampling option:selected").val();
 	var sampleRes = $("#sample_res option:selected").val();
 	var fps = $("#frames_p_s").val();
-	
+
 	return {
 		width,
 		height,
@@ -71,54 +71,52 @@ function calculate (){
 	var frameSize= calcFrameSize(currInput.width, currInput.height, currInput.sampling, currInput.sampleRes);
 	var videoSize = calcVideoSize(frameSize, currInput.fps);
 	var sampling = $("#sampling option:selected").val();
-	
+
 	/*console.log("Sampling : ", sampling);
 	console.log( "Frame Size : ", frameSize);
 	console.log( "Video Size : ", videoSize);*/
-	
+
 	$("#frame_size").html( toFormattedString( frameSize/ 1000000.0 ) );
 	$("#video_size").text( toFormattedString( videoSize/ 1000000.0 ) );
-	
+
 	var ppf = calcPcktsPerFrame( currInput.width* currInput.height, sampling, currInput.sampleRes);
 	var headerSize = calcAvgHeaderSize( calcRTPPayloadHeaderSize());
-	
+
 	var streamSize = calcStreamSize( currInput.fps, headerSize, ppf, videoSize);
-	
+
 	$("#header_size").text( toFormattedString( headerSize ) );
 	$("#stream_size").text( toFormattedString( streamSize/ 1000000 ) );
 	$("#pps").text( toFormattedString( ppf * currInput.fps ) );
 	$("#ppf").text( toFormattedString( ppf ));
-	
+
 	$("#gbit_req").text( toFormattedString((streamSize * 8) /1000000 ));
-	
+
 	renderMinNetwork( (streamSize * 8) /1000000 );
 }
 
 function toFormattedString ( num ){
 	var rounded  = Math.round( num * 100.0 ) / 100.0;
-	var str_seperated = rounded.toLocaleString();
+	//var str_seperated = rounded.toLocaleString();
+	var nf = Intl.NumberFormat("en-IN", {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2
+	});
+	var str_seperated = nf.format( rounded  );
+
 	const SEPERATOR_CHAR = " ";
-	var str_custom_seperated = str_seperated.replace(/,/g , " " );
-	
-	return checkForDec( str_custom_seperated);
-	
+	var str_custom_seperated = str_seperated.replace(/,/g , SEPERATOR_CHAR );
+
+	return str_custom_seperated;
+
 }
 
-function checkForDec( str ){
-  if( str.indexOf( "." ) == -1){
-    return str +".00";
-  }
-  else {
-    return str;
-  }
-}
 
 function renderMinNetwork( streamSizeMBit){
-	
+
 	$("#min_network_speed").removeClass("is-hidden");
-	
-	const labelIDs = { 
-		100:"#100MBit", 
+
+	const labelIDs = {
+		100:"#100MBit",
 		1000:"#1GBit",
 		10000:"#10GBit",
 		25000:"#25GBit",
@@ -128,7 +126,7 @@ function renderMinNetwork( streamSizeMBit){
 		200000:"#200GBit",
 		400000:"#400GBit"
 	};
-	
+
 	var smallestKey;
 	for( var key in labelIDs){
 		if ( key < streamSizeMBit){
@@ -136,29 +134,28 @@ function renderMinNetwork( streamSizeMBit){
 			$( labelIDs[key] ).find("span").text( "0" );
 		}
 		else{
-			console.table({"Smallest Key": smallestKey, "Key":key});
-			console.log("Smalleest key", smallestKey);
+
 			if( smallestKey ){
-				console.log("Smallest key is not null");
+				//Smallest key is not null
 				if( parseInt(key) < parseInt(smallestKey) ) {
-					console.log("key is smaller as smallest key");
+					//key is smaller as smallest key
 					smallestKey = key
 				};
 			}
 			else{ smallestKey = key;}
-			
+
 			$( labelIDs[key] ).removeClass("text-error");
 			$( labelIDs[key] ).find("span").text( Math.floor(key / streamSizeMBit) );
 		}
 	}
-	
+
 	if ( !smallestKey ) $("#min_network_speed").text(">400Gbit!");
 	else{
 		$("#min_network_speed").attr("data-badge", Math.floor(smallestKey / streamSizeMBit));
 		$("#min_network_speed").text( labelIDs[smallestKey]);
 	}
-	
-	
+
+
 }
 
 function calcFrameSize( width, height, sampling, sampleRes ){
@@ -200,5 +197,5 @@ function calcStreamSize( fps, headerSize, ppf, videoSize){
 
 
 
-// ETHERNET + IP_HEADER + UDP_HEADER + 
+// ETHERNET + IP_HEADER + UDP_HEADER +
 const RTP_HEADER_SIZE_BYTE = 14 + 20 + 8 + 12;
